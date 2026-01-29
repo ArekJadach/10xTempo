@@ -1,0 +1,32 @@
+@page
+@model _10xTempo.Pages.Reports.CreateModel
+@{
+    ViewData["Title"] = "Dodaj raport";
+}
+
+<section class="stack narrow">
+    <h2>Dodaj raport</h2>
+    <p class="muted">Wybierz firmę i wpisz liczbę przepracowanych godzin.</p>
+
+    <form method="post">
+        <div class="field">
+            <label asp-for="Input.CompanyId"></label>
+            <select asp-for="Input.CompanyId" asp-items="Model.CompanyOptions"></select>
+            <span class="text-danger" asp-validation-for="Input.CompanyId"></span>
+        </div>
+
+        <div class="field">
+            <label asp-for="Input.Hours"></label>
+            <input asp-for="Input.Hours" step="0.25" min="0.25" max="24"/>
+            <span class="text-danger" asp-validation-for="Input.Hours"></span>
+        </div>
+
+        <button type="submit" class="button">Zapisz</button>
+        <a class="button secondary" asp-page="Index">Anuluj</a>
+    </form>
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}

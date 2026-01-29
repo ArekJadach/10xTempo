@@ -1,0 +1,25 @@
+@page
+@model _10xTempo.Pages.Companies.CreateModel
+@{
+    ViewData["Title"] = "Nowa firma";
+}
+
+<section class="stack narrow">
+    <h2>Nowa firma</h2>
+    <p class="muted">Nazwa jest dowolna — GUID generuje się automatycznie.</p>
+
+    <form method="post">
+        <div class="field">
+            <label asp-for="Input.Name"></label>
+            <input asp-for="Input.Name"/>
+            <span class="text-danger" asp-validation-for="Input.Name"></span>
+        </div>
+        <button type="submit" class="button">Utwórz</button>
+        <a class="button secondary" asp-page="Index">Anuluj</a>
+    </form>
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}

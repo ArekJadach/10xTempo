@@ -1,0 +1,25 @@
+@page
+@model _10xTempo.Pages.Companies.JoinModel
+@{
+    ViewData["Title"] = "Dołącz do firmy";
+}
+
+<section class="stack narrow">
+    <h2>Dołącz do istniejącej firmy</h2>
+    <p class="muted">Wklej GUID udostępniony przez administratora firmy.</p>
+
+    <form method="post">
+        <div class="field">
+            <label asp-for="Input.CompanyId"></label>
+            <input asp-for="Input.CompanyId"/>
+            <span class="text-danger" asp-validation-for="Input.CompanyId"></span>
+        </div>
+        <button type="submit" class="button">Dołącz</button>
+        <a class="button secondary" asp-page="Index">Anuluj</a>
+    </form>
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}

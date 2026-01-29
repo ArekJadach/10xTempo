@@ -1,0 +1,44 @@
+@page
+@model _10xTempo.Pages.Reports.IndexModel
+@{
+    ViewData["Title"] = "Twoje raporty";
+}
+
+<section class="stack">
+    <header class="between">
+        <div>
+            <h2>Raporty</h2>
+            <p class="muted">Raportuj godziny do firm, do których należysz.</p>
+        </div>
+        <a class="button" asp-page="Create">Dodaj raport</a>
+    </header>
+
+    @if (!Model.Reports.Any())
+    {
+        <p>Nie masz jeszcze raportów. Dodaj pierwszy wpis.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Firma</th>
+                <th>Godziny</th>
+                <th>Utworzono</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var report in Model.Reports)
+            {
+                <tr>
+                    <td>@report.CompanyName</td>
+                    <td>@report.Hours</td>
+                    <td>@report.CreatedOn.ToLocalTime().ToString("g")</td>
+                    <td>@(report.IsApproved ? "Zatwierdzony" : "Oczekuje")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</section>

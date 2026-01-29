@@ -1,0 +1,89 @@
+:root {
+  --accent: #2563eb;
+}
+
+body {
+  font-family: "DM Sans", "Inter", system-ui, -apple-system, sans-serif;
+  background: #f7f8fb;
+}
+
+.container {
+  max-width: 1080px;
+}
+
+nav ul {
+  gap: 0.8rem;
+}
+
+nav ul li strong {
+  letter-spacing: 0.3px;
+}
+
+.hero {
+  padding: 2rem;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.muted {
+  color: #6b7280;
+}
+
+.callout {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #312e81;
+}
+
+.callout.success {
+  background: #ecfdf3;
+  border-color: #a7f3d0;
+  color: #065f46;
+}
+
+.table {
+  width: 100%;
+}
+
+.table th {
+  font-weight: 600;
+}
+
+.narrow {
+  max-width: 540px;
+}
+
+code {
+  background: #0f172a;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,22 @@
+# Build outputs
+bin/
+obj/
+
+# User-specific
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDE
+.vs/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Local data
+*.db
+*.sqlite
+*.sqlite3

@@ -1,0 +1,45 @@
+@page
+@model _10xTempo.Pages.Companies.IndexModel
+@{
+    ViewData["Title"] = "Twoje firmy";
+}
+
+<section class="stack">
+    <header class="between">
+        <div>
+            <h2>Firmy</h2>
+            <p class="muted">Zarządzaj firmami i rolami związanymi z Twoim kontem.</p>
+        </div>
+        <div class="actions">
+            <a class="button" asp-page="Create">Nowa firma</a>
+            <a class="button secondary" asp-page="Join">Dołącz po GUID</a>
+        </div>
+    </header>
+
+    @if (!Model.Companies.Any())
+    {
+        <p>Nie należysz jeszcze do żadnej firmy. Utwórz firmę lub dołącz po GUID.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>GUID</th>
+                <th>Rola</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var company in Model.Companies)
+            {
+                <tr>
+                    <td>@company.Name</td>
+                    <td><code>@company.Id</code></td>
+                    <td>@company.Role</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</section>

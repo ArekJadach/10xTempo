@@ -1,0 +1,36 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Tempo – raportowanie czasu";
+}
+
+<section class="hero">
+    <h1>Tempo — szybkie raportowanie czasu pracy</h1>
+    <p>Twórz firmy, dołączaj po GUID, raportuj godziny i zatwierdzaj wpisy w jednym, lekkim interfejsie.</p>
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        <a class="button" asp-page="/Companies/Index">Przejdź do panelu</a>
+    }
+    else
+    {
+        <div class="hero-actions">
+            <a class="button" asp-area="Identity" asp-page="/Account/Register">Zarejestruj</a>
+            <a class="button secondary" asp-area="Identity" asp-page="/Account/Login">Zaloguj</a>
+        </div>
+    }
+</section>
+
+<section class="grid">
+    <article>
+        <h3>Kontrola dostępu</h3>
+        <p>Logowanie oparte na cookie. Dostęp do CRUD tylko po zalogowaniu.</p>
+    </article>
+    <article>
+        <h3>CRUD i logika</h3>
+        <p>Firmy z GUID, role Admin/Employee, raporty z akceptacją.</p>
+    </article>
+    <article>
+        <h3>CI/CD i test</h3>
+        <p>GitHub Actions: restore, build, test. Test integracyjny z perspektywy użytkownika.</p>
+    </article>
+</section>

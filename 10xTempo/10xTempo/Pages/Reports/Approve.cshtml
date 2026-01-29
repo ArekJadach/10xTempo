@@ -1,0 +1,47 @@
+@page
+@model _10xTempo.Pages.Reports.ApproveModel
+@{
+    ViewData["Title"] = "Zatwierdzenia";
+}
+
+<section class="stack">
+    <header>
+        <h2>Raporty oczekujące</h2>
+        <p class="muted">Tylko firmy, w których masz rolę Admin.</p>
+    </header>
+
+    @if (!Model.PendingReports.Any())
+    {
+        <p>Brak raportów do zatwierdzenia.</p>
+    }
+    else
+    {
+        <form method="post">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Firma</th>
+                    <th>Użytkownik</th>
+                    <th>Godziny</th>
+                    <th>Data</th>
+                    <th>Akcja</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var report in Model.PendingReports)
+                {
+                    <tr>
+                        <td>@report.CompanyName</td>
+                        <td>@report.UserEmail</td>
+                        <td>@report.Hours</td>
+                        <td>@report.CreatedOn.ToLocalTime().ToString("g")</td>
+                        <td>
+                            <button type="submit" class="button" asp-page-handler="Approve" asp-route-id="@report.Id">Zatwierdź</button>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </form>
+    }
+</section>
