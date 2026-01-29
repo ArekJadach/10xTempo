@@ -88,11 +88,14 @@ jobs:
           restore-keys: |
             nuget-${{ runner.os }}-
 
+      - name: Prepare results directory
+        run: mkdir -p $TestResults_Path
+
       - name: Restore
         run: dotnet restore $Solution_Path
 
       - name: Test (trx + coverage)
-        run: dotnet test $Solution_Path --configuration Release --no-build --logger "trx;LogFileName=test_results.trx" --results-directory $TestResults_Path /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$TestResults_Path/coverage/
+        run: dotnet test $Solution_Path --configuration Release --logger "trx;LogFileName=test_results.trx" --results-directory $TestResults_Path /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$TestResults_Path/coverage/
 
       - name: Upload test results
         if: always()
