@@ -18,3 +18,7 @@ Pierwsze uruchomienie utworzy plik bazy `tempo.db`.
 
 ## CI/CD
 Workflow: `.github/workflows/ci.yml` (push/PR na `main`, .NET 10).
+
+## Dokumentacja /.ai
+- Każde nowe zapytanie/feature powinno mieć notatkę w `.ai/api` (plan implementacji, zakres, testy).
+- Przy pracy w Cursor IDE czytaj `README.md`, aby stosować się do powyższych zasad i stacku.

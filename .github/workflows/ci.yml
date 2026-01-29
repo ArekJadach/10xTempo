@@ -9,6 +9,11 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    env:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      Solution_Path: 10xTempo/10xTempo.sln
+      TestResults_Path: TestResults
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,11 +23,26 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/packages.lock.json', '**/*.csproj', '**/*.sln') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
       - name: Restore
-        run: dotnet restore 10xTempo/10xTempo.sln
+        run: dotnet restore $Solution_Path
 
       - name: Build
-        run: dotnet build 10xTempo/10xTempo.sln --configuration Release --no-restore
+        run: dotnet build $Solution_Path --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test 10xTempo/10xTempo.sln --configuration Release --no-build
+        run: dotnet test $Solution_Path --configuration Release --no-build --logger "trx;LogFileName=test_results.trx" --results-directory $TestResults_Path
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: ${{ env.TestResults_Path }}
