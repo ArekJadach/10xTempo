@@ -4,7 +4,7 @@
     ViewData["Title"] = "Dołącz do firmy";
 }
 
-<section class="stack narrow">
+<section class="card stack narrow">
     <h2>Dołącz do istniejącej firmy</h2>
     <p class="muted">Wklej GUID udostępniony przez administratora firmy.</p>
 
@@ -14,8 +14,10 @@
             <input asp-for="Input.CompanyId"/>
             <span class="text-danger" asp-validation-for="Input.CompanyId"></span>
         </div>
-        <button type="submit" class="button">Dołącz</button>
-        <a class="button secondary" asp-page="Index">Anuluj</a>
+        <div class="form-actions">
+            <button type="submit" class="button">Dołącz</button>
+            <a class="button secondary" asp-page="Index">Anuluj</a>
+        </div>
     </form>
 </section>
 

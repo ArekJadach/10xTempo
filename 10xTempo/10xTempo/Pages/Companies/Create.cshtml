@@ -4,7 +4,7 @@
     ViewData["Title"] = "Nowa firma";
 }
 
-<section class="stack narrow">
+<section class="card stack narrow">
     <h2>Nowa firma</h2>
     <p class="muted">Nazwa jest dowolna — GUID generuje się automatycznie.</p>
 
@@ -14,8 +14,10 @@
             <input asp-for="Input.Name"/>
             <span class="text-danger" asp-validation-for="Input.Name"></span>
         </div>
-        <button type="submit" class="button">Utwórz</button>
-        <a class="button secondary" asp-page="Index">Anuluj</a>
+        <div class="form-actions">
+            <button type="submit" class="button">Utwórz</button>
+            <a class="button secondary" asp-page="Index">Anuluj</a>
+        </div>
     </form>
 </section>
 

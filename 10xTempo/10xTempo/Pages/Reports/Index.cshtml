@@ -4,14 +4,16 @@
     ViewData["Title"] = "Twoje raporty";
 }
 
-<section class="stack">
-    <header class="between">
+<section class="card stack">
+    <div class="page-header">
         <div>
             <h2>Raporty</h2>
             <p class="muted">Raportuj godziny do firm, do których należysz.</p>
         </div>
-        <a class="button" asp-page="Create">Dodaj raport</a>
-    </header>
+        <a class="button primary" asp-page="Create">
+            <span aria-hidden="true">🕒</span> Dodaj raport
+        </a>
+    </div>
 
     @if (!Model.Reports.Any())
     {
@@ -19,26 +21,28 @@
     }
     else
     {
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Firma</th>
-                <th>Godziny</th>
-                <th>Utworzono</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var report in Model.Reports)
-            {
+        <div class="table-wrapper">
+            <table class="table">
+                <thead>
                 <tr>
-                    <td>@report.CompanyName</td>
-                    <td>@report.Hours</td>
-                    <td>@report.CreatedOn.ToLocalTime().ToString("g")</td>
-                    <td>@(report.IsApproved ? "Zatwierdzony" : "Oczekuje")</td>
+                    <th>Firma</th>
+                    <th>Godziny</th>
+                    <th>Utworzono</th>
+                    <th>Status</th>
                 </tr>
-            }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach (var report in Model.Reports)
+                {
+                    <tr>
+                        <td>@report.CompanyName</td>
+                        <td>@report.Hours</td>
+                        <td>@report.CreatedOn.ToLocalTime().ToString("g")</td>
+                        <td>@(report.IsApproved ? "Zatwierdzony" : "Oczekuje")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
     }
 </section>

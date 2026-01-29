@@ -4,11 +4,13 @@
     ViewData["Title"] = "Zatwierdzenia";
 }
 
-<section class="stack">
-    <header>
-        <h2>Raporty oczekujące</h2>
-        <p class="muted">Tylko firmy, w których masz rolę Admin.</p>
-    </header>
+<section class="card stack">
+    <div class="page-header">
+        <div>
+            <h2>Raporty oczekujące</h2>
+            <p class="muted">Tylko firmy, w których masz rolę Admin.</p>
+        </div>
+    </div>
 
     @if (!Model.PendingReports.Any())
     {
@@ -17,31 +19,33 @@
     else
     {
         <form method="post">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Firma</th>
-                    <th>Użytkownik</th>
-                    <th>Godziny</th>
-                    <th>Data</th>
-                    <th>Akcja</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var report in Model.PendingReports)
-                {
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
                     <tr>
-                        <td>@report.CompanyName</td>
-                        <td>@report.UserEmail</td>
-                        <td>@report.Hours</td>
-                        <td>@report.CreatedOn.ToLocalTime().ToString("g")</td>
-                        <td>
-                            <button type="submit" class="button" asp-page-handler="Approve" asp-route-id="@report.Id">Zatwierdź</button>
-                        </td>
+                        <th>Firma</th>
+                        <th>Użytkownik</th>
+                        <th>Godziny</th>
+                        <th>Data</th>
+                        <th>Akcja</th>
                     </tr>
-                }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach (var report in Model.PendingReports)
+                    {
+                        <tr>
+                            <td>@report.CompanyName</td>
+                            <td>@report.UserEmail</td>
+                            <td>@report.Hours</td>
+                            <td>@report.CreatedOn.ToLocalTime().ToString("g")</td>
+                            <td>
+                                <button type="submit" class="button" asp-page-handler="Approve" asp-route-id="@report.Id">Zatwierdź</button>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
         </form>
     }
 </section>

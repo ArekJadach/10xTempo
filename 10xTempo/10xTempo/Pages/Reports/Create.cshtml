@@ -4,7 +4,7 @@
     ViewData["Title"] = "Dodaj raport";
 }
 
-<section class="stack narrow">
+<section class="card stack narrow">
     <h2>Dodaj raport</h2>
     <p class="muted">Wybierz firmę i wpisz liczbę przepracowanych godzin.</p>
 
@@ -21,8 +21,10 @@
             <span class="text-danger" asp-validation-for="Input.Hours"></span>
         </div>
 
-        <button type="submit" class="button">Zapisz</button>
-        <a class="button secondary" asp-page="Index">Anuluj</a>
+        <div class="form-actions">
+            <button type="submit" class="button">Zapisz</button>
+            <a class="button secondary" asp-page="Index">Anuluj</a>
+        </div>
     </form>
 </section>
 

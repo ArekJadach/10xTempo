@@ -4,17 +4,21 @@
     ViewData["Title"] = "Twoje firmy";
 }
 
-<section class="stack">
-    <header class="between">
+<section class="card stack">
+    <div class="page-header">
         <div>
             <h2>Firmy</h2>
             <p class="muted">Zarządzaj firmami i rolami związanymi z Twoim kontem.</p>
         </div>
         <div class="actions">
-            <a class="button" asp-page="Create">Nowa firma</a>
-            <a class="button secondary" asp-page="Join">Dołącz po GUID</a>
+            <a class="button primary" asp-page="Create">
+                <span aria-hidden="true">➕</span> Nowa firma
+            </a>
+            <a class="button ghost" asp-page="Join">
+                <span aria-hidden="true">🔗</span> Dołącz po GUID
+            </a>
         </div>
-    </header>
+    </div>
 
     @if (!Model.Companies.Any())
     {
@@ -22,24 +26,26 @@
     }
     else
     {
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>GUID</th>
-                <th>Rola</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var company in Model.Companies)
-            {
+        <div class="table-wrapper">
+            <table class="table">
+                <thead>
                 <tr>
-                    <td>@company.Name</td>
-                    <td><code>@company.Id</code></td>
-                    <td>@company.Role</td>
+                    <th>Nazwa</th>
+                    <th>GUID</th>
+                    <th>Rola</th>
                 </tr>
-            }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach (var company in Model.Companies)
+                {
+                    <tr>
+                        <td>@company.Name</td>
+                        <td><code>@company.Id</code></td>
+                        <td>@company.Role</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
     }
 </section>
