@@ -7,8 +7,65 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  format:
     runs-on: ubuntu-latest
+    env:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      Solution_Path: 10xTempo/10xTempo.sln
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/packages.lock.json', '**/*.csproj', '**/*.sln') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: dotnet format (verify)
+        run: dotnet format $Solution_Path --verify-no-changes
+
+  build:
+    runs-on: ubuntu-latest
+    needs: format
+    env:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      Solution_Path: 10xTempo/10xTempo.sln
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/packages.lock.json', '**/*.csproj', '**/*.sln') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: Restore
+        run: dotnet restore $Solution_Path
+
+      - name: Build
+        run: dotnet build $Solution_Path --configuration Release --no-restore
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
     env:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
@@ -34,11 +91,8 @@ jobs:
       - name: Restore
         run: dotnet restore $Solution_Path
 
-      - name: Build
-        run: dotnet build $Solution_Path --configuration Release --no-restore
-
-      - name: Test
-        run: dotnet test $Solution_Path --configuration Release --no-build --logger "trx;LogFileName=test_results.trx" --results-directory $TestResults_Path
+      - name: Test (trx + coverage)
+        run: dotnet test $Solution_Path --configuration Release --no-build --logger "trx;LogFileName=test_results.trx" --results-directory $TestResults_Path /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$TestResults_Path/coverage/
 
       - name: Upload test results
         if: always()
@@ -46,3 +100,10 @@ jobs:
         with:
           name: test-results
           path: ${{ env.TestResults_Path }}
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: ${{ env.TestResults_Path }}/coverage/
