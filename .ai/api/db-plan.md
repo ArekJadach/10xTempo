@@ -1,9 +1,9 @@
-# DB Plan — Tempo MVP (SQLite)
+# DB Plan — Tempo MVP (SQLite, .NET 10)
 
 ## 1. Tabele i kolumny
 
-### Users
-- `Id` TEXT PRIMARY KEY (GUID)
+### Users (Identity)
+- `Id` TEXT PRIMARY KEY (GUID, IdentityUser)
 - `Email` TEXT NOT NULL UNIQUE
 - `PasswordHash` TEXT NOT NULL
 
@@ -12,14 +12,14 @@
 - `Name` TEXT NOT NULL
 
 ### UserCompanies
-- `Id` TEXT PRIMARY KEY (GUID)
+- `Id` INTEGER PRIMARY KEY AUTOINCREMENT
 - `UserId` TEXT NOT NULL (FK -> Users.Id)
 - `CompanyId` TEXT NOT NULL (FK -> Companies.Id)
 - `Role` TEXT NOT NULL CHECK (Role IN ('Admin','Employee'))
 - UNIQUE (`UserId`, `CompanyId`)
 
 ### Reports
-- `Id` TEXT PRIMARY KEY (GUID)
+- `Id` INTEGER PRIMARY KEY AUTOINCREMENT
 - `UserId` TEXT NOT NULL (FK -> Users.Id)
 - `CompanyId` TEXT NOT NULL (FK -> Companies.Id)
 - `Hours` DECIMAL(18,2) NOT NULL

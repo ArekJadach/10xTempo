@@ -1,10 +1,11 @@
 # API Plan — Tempo MVP
 
-## 1. Zalozenia
-- REST API wspierajace Razor Pages (cookie auth).
-- Wszystkie endpointy poza rejestracja/logowaniem wymagaja uwierzytelnienia.
+## 1. Założenia
+- REST API wspierające Razor Pages (cookie auth).
+- Wszystkie endpointy poza rejestracją/logowaniem wymagają uwierzytelnienia.
 - Format JSON, kodowanie UTF-8.
 - Baza danych: SQLite (EF Core Code First).
+- Platforma: .NET 10, Identity (cookie), precision decimal(18,2) dla godzin.
 
 ## 2. Zasoby
 - **auth**: rejestracja, logowanie, wylogowanie.
@@ -117,13 +118,13 @@
   - Akceptacja raportu przez admina firmy.
   - Response 204.
 
-## 4. Autoryzacja i reguly dostepu
-- Cookie auth; brak dostepu anonimowego poza rejestracja/logowaniem.
-- Uzytkownik widzi tylko firmy, do ktorych nalezy.
-- Raporty: pracownik widzi swoje; admin firmy widzi raporty firmy i moze je akceptowac.
+## 4. Autoryzacja i reguły dostępu
+- Cookie auth; brak dostępu anonimowego poza rejestracją/logowaniem.
+- Użytkownik widzi tylko firmy, do których należy.
+- Raporty: pracownik widzi swoje; admin firmy widzi raporty firmy i może je akceptować.
 
 ## 5. Walidacje
 - Email unikalny, format sprawdzany w aplikacji.
-- Password min. 8 znakow (doprecyzowac w implementacji).
-- Hours > 0 oraz format decimal(18,2).
-- companyGuid musi istniec i uzytkownik nie moze byc przypisany podwojnie.
+- Hasło: min. 6 znaków (w implementacji brak wymogu znaków specjalnych, brak wymogu wielkich liter).
+- Hours: zakres 0.25–24, format decimal(18,2).
+- companyGuid musi istnieć i użytkownik nie może być przypisany podwójnie.

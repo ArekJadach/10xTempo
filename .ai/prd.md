@@ -56,6 +56,7 @@ Potrzebny jest lekki system, w ktorym uzytkownik moze raportowac czas do jednej 
 - .NET 10, Razor Pages.
 - EF Core Code First.
 - SQLite (docelowo dla MVP).
+- Dark UI (landing + panele) zoptymalizowany pod desktop, responsywny.
 - Responsywny, czytelny interfejs.
 
 ## Model danych (skrot)
@@ -75,7 +76,7 @@ Potrzebny jest lekki system, w ktorym uzytkownik moze raportowac czas do jednej 
   - test
 
 ## Status wdrożenia (MVP)
-- UI Razor Pages: logowanie, firmy z GUID, role Admin/Employee, raporty + zatwierdzanie.
+- UI Razor Pages (dark theme): logowanie, firmy z GUID, role Admin/Employee, raporty + zatwierdzanie; CTA tylko do log/rejestracji na landing, sekcja korzyści dla pracownika/właściciela.
 - Baza: SQLite (`tempo.db`), EF Core Code First, kultura ustawiona na Invariant dla spójnego parsowania godzin.
 - Test: xUnit + WebApplicationFactory (rejestracja → firma → raport → weryfikacja).
 - CI: GitHub Actions (`.github/workflows/ci.yml`) – restore, build, test na push/PR do `main`, target .NET 10.
