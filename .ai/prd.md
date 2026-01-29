@@ -53,7 +53,7 @@ Potrzebny jest lekki system, w ktorym uzytkownik moze raportowac czas do jednej 
 - `IsApproved` domyslnie `false`.
 
 ## Wymagania niefunkcjonalne
-- .NET 8, Razor Pages.
+- .NET 10, Razor Pages.
 - EF Core Code First.
 - SQLite (docelowo dla MVP).
 - Responsywny, czytelny interfejs.
@@ -78,7 +78,7 @@ Potrzebny jest lekki system, w ktorym uzytkownik moze raportowac czas do jednej 
 - UI Razor Pages: logowanie, firmy z GUID, role Admin/Employee, raporty + zatwierdzanie.
 - Baza: SQLite (`tempo.db`), EF Core Code First, kultura ustawiona na Invariant dla spójnego parsowania godzin.
 - Test: xUnit + WebApplicationFactory (rejestracja → firma → raport → weryfikacja).
-- CI: GitHub Actions (`.github/workflows/ci.yml`) – restore, build, test na push/PR do `main`.
+- CI: GitHub Actions (`.github/workflows/ci.yml`) – restore, build, test na push/PR do `main`, target .NET 10.
 
 ## Metryki sukcesu
 - Uzytkownik moze dodac raport w < 2 min od zalogowania.

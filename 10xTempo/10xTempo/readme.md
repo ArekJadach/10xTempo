@@ -2,7 +2,7 @@ Tempo – System Raportowania Czasu Pracy (MVP)
 Tempo to ekspresowa aplikacja webowa zbudowana w technologii ASP.NET Core Razor Pages. Projekt demonstruje pełny cykl życia danych (CRUD), zaawansowaną logikę biznesową opartą na unikalnych identyfikatorach firm oraz zautomatyzowany proces CI/CD.
 
 🛠️ Architektura Techniczna
-Framework: .NET 8 (Razor Pages) – wybrany dla maksymalnej efektywności rozwoju UI i backendu.
+Framework: .NET 10 (Razor Pages) – wybrany dla maksymalnej efektywności rozwoju UI i backendu.
 
 Baza Danych: SQLite (lekka, plikowa baza danych, idealna do szybkich wdrożeń MVP).
 Konfiguracja: `appsettings.json` uzywa `Data Source=tempo.db`.
@@ -66,4 +66,4 @@ Uruchamia testy automatyczne.
 `dotnet test 10xTempo/10xTempo.sln` – integracyjny przebieg: rejestracja → utworzenie firmy → dodanie raportu → weryfikacja.
 
 ⚙️ CI/CD
-Workflow: `.github/workflows/ci.yml` (restore → build → test na push/PR do `main`).
+Workflow: `.github/workflows/ci.yml` (restore → build → test na push/PR do `main`, .NET 10).

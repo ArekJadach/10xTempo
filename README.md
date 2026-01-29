@@ -1,6 +1,6 @@
 # 10xTempo
 
-Tempo – lekki system raportowania czasu pracy w ASP.NET Core Razor Pages (SQLite, EF Core Code First).
+Tempo – lekki system raportowania czasu pracy w ASP.NET Core Razor Pages (SQLite, EF Core Code First, .NET 10).
 
 - Logowanie (cookie auth), firmy z GUID, role Admin/Employee, raporty godzin z akceptacją.
 - Test integracyjny (xUnit + WebApplicationFactory) odwzorowujący przepływ: rejestracja → utworzenie firmy → dodanie raportu.
@@ -17,4 +17,4 @@ Pierwsze uruchomienie utworzy plik bazy `tempo.db`.
 `dotnet test 10xTempo/10xTempo.sln`
 
 ## CI/CD
-Workflow: `.github/workflows/ci.yml` (push/PR na `main`).
+Workflow: `.github/workflows/ci.yml` (push/PR na `main`, .NET 10).
