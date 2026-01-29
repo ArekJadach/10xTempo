@@ -146,7 +146,7 @@ public class TempoFactory : WebApplicationFactory<Program>
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-    builder.UseEnvironment("Development");
+        builder.UseEnvironment("Development");
         builder.ConfigureServices(services =>
         {
             var descriptor = services.SingleOrDefault(
