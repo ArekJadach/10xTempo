@@ -13,25 +13,27 @@
     <link rel="stylesheet" href="~/_10xTempo.styles.css" asp-append-version="true"/>
 </head>
 <body>
-<header class="container">
-    <nav>
-        <ul>
-            <li><strong>Tempo</strong></li>
-            <li><a asp-area="" asp-page="/Index">Home</a></li>
-            @if (User.Identity?.IsAuthenticated ?? false)
-            {
-                <li><a asp-area="" asp-page="/Companies/Index">Companies</a></li>
-                <li><a asp-area="" asp-page="/Reports/Index">Reports</a></li>
-                <li><a asp-area="" asp-page="/Reports/Approve">Approvals</a></li>
-            }
-            else
-            {
-                <li><a asp-area="" asp-page="/Privacy">Privacy</a></li>
-            }
-        </ul>
-        <partial name="_LoginPartial"/>
-    </nav>
-</header>
+@{
+    var currentPage = Context.GetRouteValue("page")?.ToString();
+    var hideHeader = string.Equals(currentPage, "/Index", StringComparison.OrdinalIgnoreCase) && !(User.Identity?.IsAuthenticated ?? false);
+}
+@if (!hideHeader)
+{
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a class="brand" asp-area="" asp-page="/Index">Tempo</a></li>
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <li><a asp-area="" asp-page="/Companies/Index">Companies</a></li>
+                    <li><a asp-area="" asp-page="/Reports/Index">Reports</a></li>
+                    <li><a asp-area="" asp-page="/Reports/Approve">Approvals</a></li>
+                }
+            </ul>
+            <partial name="_LoginPartial"/>
+        </nav>
+    </header>
+}
 <main class="container" role="main">
     @if (TempData["Flash"] is string flashMessage)
     {
